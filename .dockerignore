@@ -1,0 +1,11 @@
+.git
+.dockerignore
+.gitignore
+.idea
+.venv
+.sesskey
+Dockerfile
+/.sesskey
+__pycache__/
+*.py[cod]
+*$py.class

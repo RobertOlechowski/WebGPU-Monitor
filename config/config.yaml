@@ -1,0 +1,181 @@
+!Config
+app:
+  refresh_period: 5
+
+output:
+  - title: Timestamp
+    ref: timestamp
+
+  - title: Card
+    format_str:
+      - "{0.name}"
+      - "[{0.index} / {0.count}]"
+
+  - title: Performance state
+    ref: pstate
+
+  - title: Version
+    format_str:
+      - "SMI: {0.smi_version}"
+      - "CUDA: {0.cuda_version}"
+      - "Driver: {0.driver_version}"
+      - "Vbios: {0.vbios_version}"
+
+  - title: Fan speed
+    ref: fan.speed
+
+  - title: Utilization
+    format_str:
+      - "gpu: {0.utilization.gpu}"
+      - "memory: {0.utilization.memory}"
+
+  - title: Temperature
+    format_str:
+      - "gpu: {0.temperature.gpu}"
+      - "memory: {0.temperature.memory}"
+
+  - title: Memory
+    format_str:
+      - "total: {0.memory.total}"
+      - "reserved: {0.memory.reserved}"
+      - "used: {0.memory.used}"
+      - "free: {0.memory.free}"
+
+  - title: Display
+    format_str:
+      - "Mode: {0.display_mode}"
+      - "Active: {0.display_active}"
+
+  - title: Persistence mode
+    ref: persistence_mode
+
+  - title: Compute mode
+    ref: compute_mode
+
+  - title: Compute cap
+    ref: compute_cap
+
+  - title: PCI
+    format_str:
+      - "BUS ID: {0.pci.bus_id}"
+      - "Device ID: {0.pci.device_id}"
+      - "Sub device ID: {0.pci.sub_device_id}"
+
+  - title: PCIE link gen
+    format_str:
+      - "[{0.pcie.link.gen.current}/{0.pcie.link.gen.max}]"
+      - "gpu: [{0.pcie.link.gen.gpucurrent}/{0.pcie.link.gen.gpumax}]"
+      - "hostmax: {0.pcie.link.gen.hostmax}"
+
+  - title: PCIE link width
+    format_str: "[{0.pcie.link.width.current}/{0.pcie.link.width.max}]"
+
+  - title: Power
+    format_str:
+      - "[{0.power.management}]"
+      - "Draw: {0.power.draw} / {0.power.limit}"
+      - "Limit: {0.power.default_limit} / {0.enforced.power.limit}"
+      - "Limit min/max: {0.power.min_limit} / {0.power.max_limit}"
+
+  - title: Clocks
+    format_str:
+      - "graphics: {0.clocks.current.graphics}"
+      - "sm: {0.clocks.current.sm}"
+      - "memory: {0.clocks.current.memory}"
+      - "video: {0.clocks.current.video}"
+
+
+#  - ref: "clocks_throttle_reasons.supported"
+#  - ref: "clocks_throttle_reasons.active"
+#  - ref: "clocks_throttle_reasons.gpu_idle"
+#  - ref: "clocks_throttle_reasons.applications_clocks_setting"
+#  - ref: "clocks_throttle_reasons.sw_power_cap"
+#  - ref: "clocks_throttle_reasons.hw_slowdown"
+#  - ref: "clocks_throttle_reasons.hw_thermal_slowdown"
+#  - ref: "clocks_throttle_reasons.hw_power_brake_slowdown"
+#  - ref: "clocks_throttle_reasons.sw_thermal_slowdown"
+#  - ref: "clocks_throttle_reasons.sync_boost"
+#  - ref: clocks.applications.graphics
+#  - ref: clocks.applications.memory
+
+
+
+nvidia_smi: # nvidia-smi --help-query-gpu
+  - query: name
+  - query: timestamp
+  - query: index
+  - query: count
+  - query: driver_version
+  - query: fan.speed
+  - query: vbios_version
+
+  - query: display_mode
+  - query: display_active
+  - query: persistence_mode
+  - query: compute_mode
+  - query: compute_cap
+  - query: pci.bus_id
+
+  - query: pci.device_id
+  - query: pci.sub_device_id
+  - query: pcie.link.gen.max
+  - query: pcie.link.gen.current
+  - query: pcie.link.gen.gpucurrent
+  - query: pcie.link.gen.gpumax
+  - query: pcie.link.gen.hostmax
+  - query: pcie.link.width.current
+  - query: pcie.link.width.max
+
+  - query: pstate
+
+  - query: temperature.gpu
+  - query: temperature.memory
+
+  - query: memory.total
+  - query: memory.reserved
+  - query: memory.used
+  - query: memory.free
+
+  - query: utilization.gpu
+  - query: utilization.memory
+
+  - query: power.management
+  - query: power.draw
+  - query: power.limit
+  - query: power.default_limit
+  - query: enforced.power.limit
+  - query: power.min_limit
+  - query: power.max_limit
+
+  - query: clocks.current.graphics
+  - query: clocks.current.sm
+  - query: clocks.current.memory
+  - query: clocks.current.video
+  - query: clocks.applications.graphics
+  - query: clocks.applications.memory
+
+#  - query: uuid
+#  - query: serial
+#  - query: pci.domain
+#  - query: pci.bus
+#  - query: pci.device
+
+#  - query: clocks_throttle_reasons.supported
+#  - query: clocks_throttle_reasons.active
+#  - query: clocks_throttle_reasons.gpu_idle
+#  - query: clocks_throttle_reasons.applications_clocks_setting
+#  - query: clocks_throttle_reasons.sw_power_cap
+#  - query: clocks_throttle_reasons.hw_slowdown
+#  - query: clocks_throttle_reasons.hw_thermal_slowdown
+#  - query: clocks_throttle_reasons.hw_power_brake_slowdown
+#  - query: clocks_throttle_reasons.sw_thermal_slowdown
+#  - query: clocks_throttle_reasons.sync_boost
+
+#  - query: vgpu_driver_capability.heterogenous_multivGPU
+#  - query: vgpu_device_capability.fractional_multiVgpu
+#  - query: vgpu_device_capability.heterogeneous_timeSlice_profile
+#  - query: vgpu_device_capability.heterogeneous_timeSlice_sizes
+#  - query: mig.mode.current
+#  - query: mig.mode.pending
+#  - query: fabric.state
+#  - query: fabric.status
