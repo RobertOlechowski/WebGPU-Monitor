@@ -12,7 +12,7 @@ if ! git diff-index --quiet HEAD --; then
     exit 1
 fi
 
-version=$(python3 buildUtls.py ver)
+version=$(python3 buildUtls.py get_ver)
 build_time=$(python3 buildUtls.py time)
 
 echo
@@ -42,11 +42,16 @@ docker build --build-arg BUILD_VERSION=${version}  --build-arg BUILD_TIME=${buil
 echo
 docker tag $image_name:$version $image_name:latest
 
+echo
 echo '=== PUSH to GitHub ==='
+echo
 docker tag $image_name:$version $github_repo/$image_name:latest
 docker tag $image_name:$version $github_repo/$image_name:$version
 docker push $github_repo/$image_name:$version
 docker push $github_repo/$image_name:latest
 
-
+echo
+echo '=== Increment version number ==='
+echo
+version=$(python3 buildUtls.py get_ver)
 

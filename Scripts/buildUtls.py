@@ -34,7 +34,13 @@ if command == "time":
     print(time.isoformat())
     sys.exit()
 
-if command == "ver":
+if command == "get_ver":
+    ver = load_version()
+    ver_text = ".".join([str(a) for a in ver])
+    print(f"v{ver_text}")
+    sys.exit()
+
+if command == "inc_ver":
     ver = load_version()
     inc_version(ver)
     save_version(ver)
