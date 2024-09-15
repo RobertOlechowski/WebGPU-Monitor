@@ -48,6 +48,11 @@ docker run -p 8000:8000 -it --gpus all ghcr.io/robertolechowski/webgpu-monitor:l
 ## Configuration
 Edit the `config/config.yaml` file to specify your preferences
 
+## Usefully config
+```
+git config --global core.autocrlf true
+```
+
 ## ToDo
  - Improve presentation: CSS, HTML, columns, font
  - Auto refresh data
