@@ -7,10 +7,10 @@ github_repo="ghcr.io/robertolechowski"
 image_name="webgpu-monitor"
 
 
-if ! git diff-index --quiet HEAD --; then
-    echo "The repository has uncommitted changes. Aborting script."
-    exit 1
-fi
+#if ! git diff-index --quiet HEAD --; then
+#    echo "The repository has uncommitted changes. Aborting script."
+#    exit 1
+#fi
 
 version=$(python3 buildUtls.py get_ver)
 build_time=$(python3 buildUtls.py time)
@@ -30,7 +30,7 @@ git tag -a "$version" -m "New release tag $version"
 echo
 echo '=== GIT PUSH ==='
 echo
-git push origin "$TAG_NAME"
+git push origin "$version"
 git push origin main
 
 #=======================================
