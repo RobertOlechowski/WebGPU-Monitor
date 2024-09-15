@@ -53,5 +53,5 @@ docker push $github_repo/$image_name:latest
 echo
 echo '=== Increment version number ==='
 echo
-version=$(python3 buildUtls.py get_ver)
+version=$(python3 buildUtls.py inc_ver)
 
