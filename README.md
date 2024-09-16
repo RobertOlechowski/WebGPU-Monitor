@@ -65,8 +65,6 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 Edit the `config/config.yaml` file to specify your preferences
 
 ## TODO and known bugs
- - Improve documentation, add screenshot
-
  - Auto refresh data
  - Add more info about given GPU. number of cores, etc
  - Add agent mode and collect data from other hosts
