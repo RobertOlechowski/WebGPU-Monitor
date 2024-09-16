@@ -1,0 +1,15 @@
+services:
+  WebGPU:
+    image: ghcr.io/robertolechowski/webgpu-monitor:latest
+    container_name: WebGPU_monitor
+    restart: unless-stopped
+    ports: [8000:8000]
+    labels:
+      com.centurylinklabs.watchtower.enable: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            count: all
+            capabilities: [gpu]

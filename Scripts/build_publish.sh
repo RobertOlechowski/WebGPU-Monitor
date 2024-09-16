@@ -1,3 +1,6 @@
+#!/bin/bash
+set -e
+
 clear
 
 # docker login ghcr.io -u robertolechowski
@@ -7,10 +10,10 @@ github_repo="ghcr.io/robertolechowski"
 image_name="webgpu-monitor"
 
 
-#if ! git diff-index --quiet HEAD --; then
-#    echo "The repository has uncommitted changes. Aborting script."
-#    exit 1
-#fi
+if ! git diff-index --quiet HEAD --; then
+    echo "The repository has uncommitted changes. Aborting script."
+    exit 1
+fi
 
 version=$(python3 buildUtls.py get_ver)
 build_time=$(python3 buildUtls.py time)
@@ -25,7 +28,9 @@ echo
 echo
 
 echo "Repository is clean. Adding tag."
+set +e
 git tag -a "$version" -m "New release tag $version"
+set -e
 
 echo
 echo '=== GIT PUSH ==='
@@ -38,9 +43,10 @@ git push origin main
 echo
 echo '=== BUILD ==='
 echo
-docker build --build-arg BUILD_VERSION=${version}  --build-arg BUILD_TIME=${build_time}  -t $image_name:$version ../.
+docker build -f ../docker/Dockerfile --build-arg BUILD_VERSION=${version}  --build-arg BUILD_TIME=${build_time}  -t $image_name:$version ../.
 echo
 docker tag $image_name:$version $image_name:latest
+
 
 echo
 echo '=== PUSH to GitHub ==='

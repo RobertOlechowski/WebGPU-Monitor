@@ -8,10 +8,9 @@ It is designed to display essential statistics and performance metrics of graphi
 - Web-based interface to `nvidia-smi` accessible from any device
 - Display of GPU usage, temperature, and other critical metrics
 
-## Requirements
+## Run docker container
+### Requirements
 Before you start, make sure to install the NVIDIA Toolkit for Docker to ensure compatibility with Docker containers managing GPU resources. 
-
-### Installing NVIDIA Toolkit for Docker
 Follow these steps to install the NVIDIA Toolkit or read more [Installing the NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
 
 ```bash
@@ -37,30 +36,47 @@ sudo systemctl restart docker
 docker run -it --gpus all nvidia/cuda:12.1.0-base-ubuntu22.04 nvidia-smi
 ```
 
-## Run docker container
-
+### Run app in docker container
 ```bash
 docker pull ghcr.io/robertolechowski/webgpu-monitor:latest
-
 docker run -p 8000:8000 -it --gpus all ghcr.io/robertolechowski/webgpu-monitor:latest
+```
+
+### Run app with docker composer
+```bash
+git clone https://github.com/RobertOlechowski/WebGPU-Monitor.git
+cd WebGPU-Monitor/docker
+docker compose up -d
+```
+
+## Run app without docker
+```bash
+git clone https://github.com/RobertOlechowski/WebGPU-Monitor.git
+cd WebGPU-Monitor
+uvicorn main:app --host 0.0.0.0 --port 8000
+# open web browser http://127.0.0.1:8000
 ```
 
 ## Configuration
 Edit the `config/config.yaml` file to specify your preferences
 
-## Usefully config
-```
-git config --global core.autocrlf true
-```
-
-## ToDo
- - Improve presentation: CSS, HTML, columns, font
- - Auto refresh data
- - Add docker composer example
+## TODO and known bugs
  - Links to GitHub page in main page. Show version number and build time in UI
+ - Improve presentation: CSS, HTML, columns, font
  - Improve documentation, add screenshot
+
+ - Auto refresh data
  - Add more info about given GPU. number of cores, etc
  - Add agent mode and collect data from other hosts
  - Keep historical data
  - Add conditional formating of cells like red clor when high temperature
- - Promote project, reddit 
+
+
+## About the Author
+This project is developed and maintained by **Robert Olechowski**. 
+I encourage you to report any issues or bugs you encounter, and I'm always open to any suggestions for improvements. 
+Please feel free to reach out via email or submit an issue on GitHub if you have any questions or need support. 
+Your contributions and feedback are highly valued and play a crucial role in the continuous enhancement of this project.
+
+- **Email:** [robertolechowski@gmail.com](mailto:robertolechowski@gmail.com)
+- **Website:** [robertolechowski.com](https://robertolechowski.com/)
