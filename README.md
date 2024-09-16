@@ -61,8 +61,6 @@ uvicorn main:app --host 0.0.0.0 --port 8000
 Edit the `config/config.yaml` file to specify your preferences
 
 ## TODO and known bugs
- - Links to GitHub page in main page. Show version number and build time in UI
- - Improve presentation: CSS, HTML, columns, font
  - Improve documentation, add screenshot
 
  - Auto refresh data

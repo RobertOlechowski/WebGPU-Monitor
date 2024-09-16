@@ -61,3 +61,6 @@ echo '=== Increment version number ==='
 echo
 version=$(python3 buildUtls.py inc_ver)
 
+echo
+echo '=== DONE ==='
+echo
