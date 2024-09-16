@@ -4,6 +4,10 @@
 This web application enables real-time monitoring and management of GPU cards, offering an web interface to `nvidia-smi`.
 It is designed to display essential statistics and performance metrics of graphics cards.
 
+<a href="documentation/images/screen.png">
+    <img src="documentation/images/screen.png" alt="Screen of WebGPU Monitor" width="425" height="500">
+</a>
+
 ## Features
 - Web-based interface to `nvidia-smi` accessible from any device
 - Display of GPU usage, temperature, and other critical metrics
