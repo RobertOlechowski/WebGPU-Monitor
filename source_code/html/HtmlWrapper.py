@@ -13,6 +13,9 @@ def _render_footer():
     else:
         return Footer(P("GPUWeb Monitor"), P(ver, cls="ver"), Ul(links))
 
+
+
+
 class HtmlWrapper:
     def __init__(self, app, config_ds):
         self._footer = _render_footer()
@@ -36,8 +39,18 @@ class HtmlWrapper:
     def render_main_page(self, data_snapshot):
         title = "GPUWeb Monitor"
         _header = Header(H1(title))
-        table = self.render_table(data_snapshot.gpu_data)
-        return Title(title), _header, Main(table, cls='container', hx_push_url='true', hx_swap_oob='true', id='main'), self._footer
+        if data_snapshot is None:
+            content = P("No data")
+        else:
+            content = self.render_table(data_snapshot.gpu_data)
+
+        _script_1 = Script(src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js", type="text/javascript"),
+        _script_2 = Script(src="assets/refresh.js", type="text/javascript")
+        #P(id="counter", cls="countdown")
+        content = [content, _script_1, _script_2]
+
+        _main = Main(*content, cls='container', hx_push_url='true', hx_swap_oob='true', id='main')
+        return Title(title), _header, _main, self._footer
 
     def render_to_text(self, url):
         from starlette.testclient import TestClient
